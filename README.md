@@ -19,6 +19,10 @@ Linux (64 bit):
 - Type `sudo chmod +x databendingutils-rs-X_X_X-linux` to make the program executable.
 - Type `./databendingutils-rs-X_X_X-linux` to run the program.
 
+## How to use:
+
+Refer to this repo's [wiki](https://github.com/sykesgabri/databendingutils-rs/wiki) for detailed instructions on usage of the program itself, as well as how to databend.
+
 ## Building from source:
 
 If you need the program on a platform not in the releases, such as 32 bit Windows or MacOS, follow these instructions:
