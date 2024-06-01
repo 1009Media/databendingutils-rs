@@ -1,5 +1,4 @@
-use image::{GenericImageView, Rgb};
-use indicatif::ProgressBar;
+use indicatif::{ProgressBar, ProgressStyle};
 use std::fs::File;
 use std::io::{BufWriter, Write};
 
@@ -17,6 +16,12 @@ pub fn convert_to_sbr(input_file: &str, output_file: &str, header_file: &str) ->
     let mut b = Vec::with_capacity((width * height) as usize);
     
     let bar = ProgressBar::new((width * height) as u64);
+    bar.set_style(
+        ProgressStyle::default_bar()
+            .template("{spinner:.green} [{elapsed_precise}] [{bar:40.cyan/blue}] {pos}/{len} ({eta})")
+            .map_err(|e| std::io::Error::new(std::io::ErrorKind::Other, e))?  // Convert TemplateError to io::Error
+            .progress_chars("#>-")
+    );
 
     for pixel in img.pixels() {
         r.push(pixel[0]);

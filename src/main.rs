@@ -1,18 +1,20 @@
-use core::prelude;
-
 mod tosbr;
 mod fromsbr;
+mod tohbmp;
+mod fromhbmp;
 
 fn main() -> Result<(), Box<dyn std::error::Error>> {
-    loop{
+    loop {
         println!("Choose an operation:");
         println!("Headless BMP conversion coming soon.");
         println!("--------------------\n");
         println!("PRE DATABENDING");
-        println!("1. Convert image to SBR\n");
+        println!("1. Convert image to SBR");
+        println!("2. Convert image to headless BMP\n");
         println!("--------------------\n");
         println!("POST DATABENDING");
-        println!("2. Convert SBR to image\n");
+        println!("3. Convert SBR to image");
+        println!("4. Convert headless BMP to image\n");
         println!("--------------------\n");
         println!("OTHER");
         println!("0. Exit");
@@ -29,8 +31,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
                 break;
             }
             "1" => {
-                println!("Convert an input image to SBR.");
-                println!("Tested with JPG and PNG, should work with most common image formats.\n");
+                println!("Convert an input image to SBR.\n");
 
                 let mut input_file = String::new();
                 println!("File path to input image: ");
@@ -39,13 +40,13 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 
                 let mut output_file = String::new();
                 println!("File path to output SBR: ");
-                std::io::stdin().read_line(&mut output_file);
+                std::io::stdin().read_line(&mut output_file)?;
                 let output_file = output_file.trim();
 
                 let mut header_file = String::new();
                 println!("File path to output header file: ");
                 println!("Recommended to save in same folder as SBR");
-                std::io::stdin().read_line(&mut header_file);
+                std::io::stdin().read_line(&mut header_file)?;
                 let header_file = header_file.trim();
 
                 tosbr::convert_to_sbr(input_file, output_file, header_file)?;
@@ -53,8 +54,30 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
                 break;
             }
             "2" => {
-                println!("Convert an SBR to a common image format.");
-                println!("Tested with JPG, PNG, BMP, and TIFF, should work with most common image formats.\n");
+                println!("Convert an input image to headless BMP.\n");
+
+                let mut input_file = String::new();
+                println!("File path to input image: ");
+                std::io::stdin().read_line(&mut input_file)?;
+                let input_file = input_file.trim();
+
+                let mut output_file = String::new();
+                println!("File path to output headless BMP: ");
+                std::io::stdin().read_line(&mut output_file)?;
+                let output_file = output_file.trim();
+
+                let mut header_file = String::new();
+                println!("File path to output header file: ");
+                println!("Recommended to save in same folder as headless BMP");
+                std::io::stdin().read_line(&mut header_file)?;
+                let header_file = header_file.trim();
+
+                tohbmp::convert_to_hbmp(input_file, output_file, header_file)?;
+                println!("Conversion complete, exiting program.");
+                break;
+            }
+            "3" => {
+                println!("Convert an SBR to a common image format.\n");
 
                 let mut input_file = String::new();
                 println!("File path to input SBR: ");
@@ -63,15 +86,37 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 
                 let mut header_file = String::new();
                 println!("File path to input header file: ");
-                std::io::stdin().read_line(&mut header_file);
+                std::io::stdin().read_line(&mut header_file)?;
                 let header_file = header_file.trim();
 
                 let mut output_file = String::new();
                 println!("File path to output image: ");
-                std::io::stdin().read_line(&mut output_file);
+                std::io::stdin().read_line(&mut output_file)?;
                 let output_file = output_file.trim();
 
                 fromsbr::convert_from_sbr(input_file, header_file, output_file)?;
+                println!("Conversion complete, exiting program.");
+                break;
+            }
+            "4" => {
+                println!("Convert a headless BMP to a common image format.\n");
+
+                let mut input_file = String::new();
+                println!("File path to input headless BMP: ");
+                std::io::stdin().read_line(&mut input_file)?;
+                let input_file = input_file.trim();
+
+                let mut header_file = String::new();
+                println!("File path to input header file: ");
+                std::io::stdin().read_line(&mut header_file)?;
+                let header_file = header_file.trim();
+
+                let mut output_file = String::new();
+                println!("File path to output image: ");
+                std::io::stdin().read_line(&mut output_file)?;
+                let output_file = output_file.trim();
+
+                fromhbmp::convert_from_hbmp(input_file, header_file, output_file)?;
                 println!("Conversion complete, exiting program.");
                 break;
             }
