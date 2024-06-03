@@ -1,7 +1,7 @@
 # DatabendingUtils-RS
 Converts common image codecs into formats more suitable for databending.
 
-This is a Rust rewrite of a program I originally wrote in Python, from now on the old Python version is deprecated, and this is the one I'll update. The old Python code is available [here](https://github.com/sykesgabri/databendingutils).
+This is a Rust rewrite of a program Gabriel Sykes originally wrote in Python, from now on the old Python version is deprecated, and this is the one that will be updated. The old Python code is available [here](https://github.com/sykesgabri/databendingutils).
 
 ## How to install:
 
@@ -34,4 +34,9 @@ If you need the program on a platform not in the releases, such as 32 bit Window
 - Now type `cargo build --release`, this will compile the program directly from its source code.
 - When that finishes, there should be a new folder called "target", and inside, another folder called "release". The compiled binary will be in there, and it will be named "databendingutils-rs" or "databendingutils-rs.exe" depending on the platform you compiled it on. You can move this binary wherever you want, and can run it the same way you would run the precompiled releases.
 
+## CONTRIBUTORS:
+
+- Gabriel Sykes
+
+---
 This project is licensed under the GNU GPL V3.
