@@ -1,13 +1,12 @@
 use std::fs::File;
 use std::io::{self, Read, BufReader, BufWriter};
 use image::{ImageFormat, load_from_memory};
-use indicatif::{ProgressBar, ProgressStyle};
 use std::path::Path;
 
 pub fn convert_from_hbmp(
     input_file: &str,
     header_file: &str,
-    output_file: &str,
+    output_file: &str
 ) -> Result<(), Box<dyn std::error::Error>> {
     // Read the BMP header
     let mut header_file = BufReader::new(File::open(header_file)?);
@@ -27,14 +26,6 @@ pub fn convert_from_hbmp(
     // Load the BMP image from the complete data
     let img = load_from_memory(&complete_bmp_data).expect("Failed to load BMP image from memory");
 
-    let bar = ProgressBar::new(bmp_body.len() as u64);
-    bar.set_style(
-        ProgressStyle::default_bar()
-            .template("{spinner:.green} [{elapsed_precise}] [{bar:40.cyan/blue}] {bytes}/{total_bytes} ({eta})")
-            .map_err(|e| io::Error::new(io::ErrorKind::Other, e))?  // Convert TemplateError to io::Error
-            .progress_chars("#>-")
-    );
-
     // Determine the output format based on the file extension
     let output_path = Path::new(output_file);
     let output_format = match output_path.extension().and_then(|ext| ext.to_str()) {
@@ -51,9 +42,6 @@ pub fn convert_from_hbmp(
     // Write the image to the specified output format
     let mut output_file = BufWriter::new(File::create(output_file)?);
     img.write_to(&mut output_file, output_format).expect("Failed to write image in the specified format");
-
-    bar.inc(bmp_body.len() as u64);
-    bar.finish_with_message("Conversion complete");
 
     Ok(())
 }

@@ -1,5 +1,4 @@
 use image::{ImageBuffer, Rgb};
-use indicatif::{ProgressBar, ProgressStyle};
 use std::fs::File;
 use std::io::{BufReader, Read};
 
@@ -28,21 +27,10 @@ pub fn convert_from_sbr(input_file: &str, header_file: &str, output_file: &str) 
     // Create ImageBuffer from bytes
     let mut img_buffer = ImageBuffer::new(width, height);
 
-    let bar = ProgressBar::new((width * height) as u64);
-    bar.set_style(
-        ProgressStyle::default_bar()
-            .template("{spinner:.green} [{elapsed_precise}] [{bar:40.cyan/blue}] {pos}/{len} ({eta})")
-            .map_err(|e| std::io::Error::new(std::io::ErrorKind::Other, e))?  // Convert TemplateError to io::Error
-            .progress_chars("#>-")
-    );
-
     for (x, y, pixel) in img_buffer.enumerate_pixels_mut() {
         let idx = (y * width + x) as usize;
         *pixel = Rgb([r_bytes[idx], g_bytes[idx], b_bytes[idx]]);
-        bar.inc(1);
     }
-
-    bar.finish();
 
     // Save the image in the desired format
     img_buffer.save(output_file)?;

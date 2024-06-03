@@ -1,7 +1,6 @@
 use std::fs::File;
 use std::io::{self, Read, Write, Seek, SeekFrom, Cursor};
 use image::ImageFormat;
-use indicatif::{ProgressBar, ProgressStyle};
 
 pub fn convert_to_hbmp(input_file: &str, output_file: &str, header_file: &str) -> io::Result<()> {
     // Read the input image
@@ -11,20 +10,9 @@ pub fn convert_to_hbmp(input_file: &str, output_file: &str, header_file: &str) -
     let mut bmp_data = Cursor::new(Vec::new());
     img.write_to(&mut bmp_data, ImageFormat::Bmp).expect("Failed to write BMP data");
 
-    // Create a progress bar
-    let pb = ProgressBar::new(bmp_data.get_ref().len() as u64);
-    pb.set_style(
-        ProgressStyle::default_bar()
-            .template("{spinner:.green} [{elapsed_precise}] [{bar:40.cyan/blue}] {bytes}/{total_bytes} ({eta})")
-            .map_err(|e| io::Error::new(io::ErrorKind::Other, e))?  // Convert TemplateError to io::Error
-            .progress_chars("#>-")
-    );
-
     // Write BMP data to file
     let mut bmp_file = File::create(output_file)?;
     bmp_file.write_all(bmp_data.get_ref())?;
-    pb.inc(bmp_data.get_ref().len() as u64);
-    pb.finish_with_message("Conversion to BMP complete");
 
     // Remove BMP header and store it separately
     let header_size = 54; // BMP header size is 54 bytes
