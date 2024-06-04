@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en_GB">
+<head>
+    <title>DatabendingUtils-RS</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+
+    <!-- Google Fonts Barlow -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,200;0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="content">
+        <h1 class="title">DatabendingUtils-RS</h1>
+        <p class="version">2.0.0</p>
+
+        <div class="main-io-fields">
+            <div class="file-path-group">
+                <input id="inputFile" placeholder="Input File Path"><br>
+                <input id="outputFile" placeholder="Output File Path"><br>
+                <input id="headerFile" placeholder="Header File Path">
+            </div>
+
+            <div class="buttons-group">
+                <div class="buttons-column pre-databending">
+                    <p>Pre Databending:</p>
+                    <button id="convertToSBR">Convert to SBR</button><br>
+                    <button id="convertToHBMP">Convert to HBMP</button>
+                </div>
+                <div class="buttons-column post-databending">
+                    <p>Post Databending:</p>
+                    <button id="convertFromSBR">Convert from SBR</button><br>
+                    <button id="convertFromHBMP">Convert from HBMP</button>
+                </div>
+            </div>
+        </div>
+
+        <div>
+            <p id="message"></p>
+        </div>
+    </div>
+
+    <script src="main.js"></script>
+</body>
+</html>
