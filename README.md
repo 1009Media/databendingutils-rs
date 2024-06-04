@@ -38,10 +38,13 @@ If you need the program on a platform not in the releases, such as 32 bit Window
 
 - On the same device that you want to run the program on, install rustup by following the instructions found [here](https://www.rust-lang.org/tools/install).
 - Install git from [here](https://git-scm.com/downloads).
-- Open a terminal or command prompt and type `git clone https://github.com/1009Media/databendingutils-rs`.
+- Install the [Tauri Prerequisites](https://tauri.app/v1/guides/getting-started/prerequisites/).
+- Open a terminal or command prompt and type `cargo install tauri-cli`.
+- After that finishes, type `git clone https://github.com/1009Media/databendingutils-rs`.
 - When that finishes, type `cd databendingutils-rs`.
-- Now type `cargo build --release`, this will compile the program directly from its source code.
-- When that finishes, there should be a new folder called "target", and inside, another folder called "release". The compiled binary will be in there, and it will be named "databendingutils-rs" or "databendingutils-rs.exe" depending on the platform you compiled it on. You can move this binary wherever you want, and can run it the same way you would run the precompiled releases.
+- Now type `cargo tauri build`, this will compile the program directly from its source code.
+- When that finishes, there should be a new folder called "target", and inside, another folder called "release". Inside that folder (on Windows and Linux) will be a file called "databendingutils-rs" or "databendingutils-rs.exe", this is the portable version of the program.
+- Inside the "bundle" folder you will find the various non-portable installers for Windows, MacOS, and Linux. Note for Mac users, the .app file you find here is your portable file, the .dmg is your permanent installer.
 
 ## CONTRIBUTORS:
 
