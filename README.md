@@ -47,4 +47,4 @@ If you need the program on a platform not in the releases, such as 32 bit Window
 - Gabriel Sykes
 
 ---
-This project is licensed under the GNU GPL V3.
+This project is licensed under the GNU LGPL-2.1
